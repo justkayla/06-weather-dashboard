@@ -32,22 +32,80 @@
     </div>
 
     <!--Search city-->
-    <div class="input-group mb-3">
-        <div class="column col-4">
-            <h2>Search for a city</h2>
-            <div class="input-group-prepend">                
-                <input type="text" class="form-control" placeholder="Minneapolis" aria-label="Example text with button addon" aria-describedby="button-addon1"></div>       
-            <button class="btn btn-outline-secondary" type="button" id="button-addon1">Search</button>            
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+                <div class="card search-box">
+                    <div class="card-body">           
+                        <h2 class="card-title">Search for a city</h2>
+                            <div class="input-group-prepend">                
+                                <input type="text" class="form-control" placeholder="Minneapolis" aria-label="Example text with button addon" aria-describedby="button-addon1"></input>     
+                                <button class="btn btn-outline-secondary" type="button" id="button-addon1">Search</button>            
+                            </div>           
+                    </div>
+                </div>
+            </div>    
+            
+    <!--Current location/weather-->
+        <!-- <div class="row"> -->
+            <div class="col-9">
+                <div class="card current-weather">
+                    <div class="card-body">
+                    <h5 class="card-title">Current Weather</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>          
+                    </div>
+                </div>
+            </div>   
+        </div>
+    </div> 
+
+    <!--5-day forecast-->
+    <div class="container-fluid">
+        <div class="row justify-content-end">
+            <div class="col-9">
+                <div class="card-group future-forecasts">
+                    <div class="card"> <!--ids for each day?-->          
+                        <div class="card-body">
+                            <h5 class="card-title">mm/dd/yyy</h5>
+                            <p class="card-text">This is where the weather information goes.</p>                            
+                        </div>
+                    </div>
+                    <div class="card">          
+                        <div class="card-body">
+                            <h5 class="card-title">mm/dd/yyy</h5>
+                            <p class="card-text">This is where the weather information goes.</p>                            
+                        </div>
+                    </div>
+                    <div class="card">          
+                        <div class="card-body">
+                            <h5 class="card-title">mm/dd/yyy</h5>
+                            <p class="card-text">This is where the weather information goes.</p>                            
+                        </div>
+                    </div>
+                    <div class="card">          
+                        <div class="card-body">
+                            <h5 class="card-title">mm/dd/yyy</h5>
+                            <p class="card-text">This is where the weather information goes.</p>                            
+                        </div>
+                    </div>
+                    <div class="card">          
+                        <div class="card-body">
+                            <h5 class="card-title">mm/dd/yyy</h5>
+                            <p class="card-text">This is where the weather information goes.</p>                            
+                        </div>
+                    </div>
+                </div>
+            </div>   
         </div>
     </div>
 
-    <!---->
-
-
-
-    <footer>
-        <h3>Made with ✨ by Kayla</h3>
-    </footer>
+    <div class="container-fluid" id="footer">
+        <div class="row align-items-end">
+            <div class="col">
+                <h3>Made with ✨ by Kayla</h3>
+            </div>
+        </div>
+    </div>
 
 
 
