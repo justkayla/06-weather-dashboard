@@ -11,3 +11,38 @@ WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 */
 
+
+
+// Code supplied by instructor
+const weatherDays = []  
+let currDay = null
+
+sampleData.list.forEach( function(timestampObj){
+
+  // Makes a moment date object for each record
+  const dateObj = moment.unix(timestampObj.dt)
+
+  // Generate the day # for the day in the date object
+  const dateNum = dateObj.format("DDD")
+
+  // If the current date in timestampObj hasn't had a record put into weatherDays, do that now 
+  // Then skip over all other records for this day
+  if( dateNum !== currDay && weatherDays.length < 5 ){
+    weatherDays.push( timestampObj )
+    currDay = dateNum
+  }
+
+})
+
+
+
+// localStorage for search history
+    // setItem, getItem
+    // tricky = types of data
+    // key = "string", value = stored as a string
+    // stringify/parse
+    // array
+
+// eventListener for search button, fetch request to grab api data and append things to screen (dynamically styled)
+
+// gitHub api users for dynamically build query string/query url into the fetch request, from fetch request you get your data that you can do whatever you want it
