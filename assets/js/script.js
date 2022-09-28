@@ -12,7 +12,7 @@ THEN I am again presented with current and future conditions for that city
 
 var searchBtn = document.querySelector('#button-addon1');
 const apiKey = '64fff1a969c76e6a48c1adb0a5ffeb4e';
-const currentWeatherEl = document.querySelectorAll('.current-weather');
+const currentWeatherEl = document.getElementById('current-weather');
 const cityInput = document.getElementById('city_name');
 
 
@@ -48,22 +48,53 @@ sampleData.list.forEach( function(timestampObj){
 // each city is a button to retrieve data from local storage
 // currentweather can have city pass into it
 
+
+// Use city input to call current local weather
 function getCurrentWeather() {
  
-  var city = cityInput.innerText
-  var requestCurrentUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
-  console.log(cityInput.innerHTML);
+  var city = cityInput.value
 
-  // fetch request to retrieve data
+  var requestCurrentUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+
+  console.log(cityInput.value);
+
+  // Fetch request to retrieve data
   fetch(requestCurrentUrl)
 
+  // Parse the data
   .then(function (response) {
       return response.json();  
     })
 
-  .then(function (data) {
-      console.log(data);   
-    })
+  // With the returned data....
+    .then(function (data) {
+      console.log(data);      
+
+    // Loop over the data to create, extract, and append relevant data
+    for (var i = 0; i < data.length; i++) {
+
+      // Link/create elements: city name, date, temperature, humidity, wind speed
+      var cityNameEl = document.getElementById("current-location");
+      var dateEl = document.getElementById("current-date");
+      var temperatureEl = document.createElement('p');
+      var humidityEl = document.createElement('p');
+      var windEl = document.createElement('p');
+
+      // Access content in data and apply to correct variable
+      cityNameEl.textContent=data[i].name;
+      dateEl.textContent=moment().format("MMM Do YYYY");
+      temperatureEl.textContent=data[i].main.temp;
+      humidityEl.textContent=data[i].main.humidity;
+      windEl.textContent=data[i].wind.speed;
+
+      // Append created elements
+        // Are we appending to the DOM if the parent element exists in the html?
+        // Do I need to create the parent element dynamically and append afterwards?
+      temperatureEl.appendChild(currentWeatherEl);
+      humidityEl.appendChild(currentWeatherEl);
+      windEl.appendChild(currentWeatherEl);
+    }
+  })
 }
 
 
