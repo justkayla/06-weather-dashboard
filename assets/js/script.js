@@ -1,8 +1,3 @@
-
-var searchBtn = document.querySelector('#button-addon1');
-const apiKey = '64fff1a969c76e6a48c1adb0a5ffeb4e';
-const currentWeatherEl = document.querySelectorAll('.current-weather');
-
 /*
 GIVEN a weather dashboard with form inputs
 WHEN I search for a city
@@ -14,6 +9,13 @@ THEN I am presented with a 5-day forecast that displays the date, an icon repres
 WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 */
+
+var searchBtn = document.querySelector('#button-addon1');
+const apiKey = '64fff1a969c76e6a48c1adb0a5ffeb4e';
+const currentWeatherEl = document.querySelectorAll('.current-weather');
+const cityInput = document.getElementById('city_name');
+
+
 
 
 
@@ -39,15 +41,21 @@ sampleData.list.forEach( function(timestampObj){
 })
 */
 
+// when the seach button is clicked, it will look into this form field, call that api call and pass in city name
+// objects for each one of the items needed
+// parse json to get to it
 
-function getCurrentWeather() { 
+// each city is a button to retrieve data from local storage
+// currentweather can have city pass into it
+
+function getCurrentWeather() {
+ 
+  var city = cityInput.innerText
+  var requestCurrentUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+  console.log(cityInput.innerHTML);
 
   // fetch request to retrieve data
-  fetch("https://api.openweathermap.org/data/2.5/weather?q="
-    + city
-    + "&units=imperial&appid="
-    + apiKey
-  )
+  fetch(requestCurrentUrl)
 
   .then(function (response) {
       return response.json();  
