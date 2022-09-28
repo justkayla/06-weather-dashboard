@@ -1,4 +1,6 @@
 
+var searchBtn = document.querySelector('#button-addon1');
+
 /*
 GIVEN a weather dashboard with form inputs
 WHEN I search for a city
@@ -17,6 +19,7 @@ THEN I am again presented with current and future conditions for that city
 const weatherDays = []  
 let currDay = null
 
+/*
 sampleData.list.forEach( function(timestampObj){
 
   // Makes a moment date object for each record
@@ -33,6 +36,48 @@ sampleData.list.forEach( function(timestampObj){
   }
 
 })
+*/
+
+
+function getCurrentWeather() {
+  // fetch request to retrieve data
+  var requestCurrWeath = 'https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={64fff1a969c76e6a48c1adb0a5ffeb4e}';
+
+  // Initiate the request
+  fetch(requestCurrWeath)
+
+    .then(function (response) {
+      return response.json();
+  })
+
+    .then(function (data) {
+      console.log(data)
+
+    })
+
+
+
+}
+
+function getFutureWeather() {
+
+  var requestFutureWeath = 'api.openweathermap.org/data/2.5/forecast?q={city name}&appid={64fff1a969c76e6a48c1adb0a5ffeb4e}';
+
+  fetch(requestFutureWeath)
+
+    .then(function (response) {
+      return response.json();
+    })
+
+    .then(function (data) {
+      console.log(data)
+    })
+}
+
+searchBtn.addEventListener('click', getCurrentWeather);
+
+
+
 
 
 
