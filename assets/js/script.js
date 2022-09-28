@@ -1,5 +1,7 @@
 
 var searchBtn = document.querySelector('#button-addon1');
+const apiKey = '64fff1a969c76e6a48c1adb0a5ffeb4e';
+const currentWeatherEl = document.querySelectorAll('.current-weather');
 
 /*
 GIVEN a weather dashboard with form inputs
@@ -15,11 +17,10 @@ THEN I am again presented with current and future conditions for that city
 
 
 
-// Code supplied by instructor
+/* Code supplied by instructor
 const weatherDays = []  
 let currDay = null
 
-/*
 sampleData.list.forEach( function(timestampObj){
 
   // Makes a moment date object for each record
@@ -39,29 +40,45 @@ sampleData.list.forEach( function(timestampObj){
 */
 
 
-function getCurrentWeather() {
+function getCurrentWeather() { 
+
   // fetch request to retrieve data
-  var requestCurrWeath = 'https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={64fff1a969c76e6a48c1adb0a5ffeb4e}';
+  fetch("https://api.openweathermap.org/data/2.5/weather?q="
+    + city
+    + "&units=imperial&appid="
+    + apiKey
+  )
 
-  // Initiate the request
-  fetch(requestCurrWeath)
-
-    .then(function (response) {
-      return response.json();
-  })
-
-    .then(function (data) {
-      console.log(data)
-
+  .then(function (response) {
+      return response.json();  
     })
 
+  .then(function (data) {
+      console.log(data);   
+    })
+}
 
+
+
+
+function displayCurrentWeather(data) {
 
 }
 
+
+
+
+
+  // create dom objects for data information
+        // card container
+        // location/date (h2)
+        // temp (p)
+        // wind (p)
+        // humidity (p)
+
 function getFutureWeather() {
 
-  var requestFutureWeath = 'api.openweathermap.org/data/2.5/forecast?q={city name}&appid={64fff1a969c76e6a48c1adb0a5ffeb4e}';
+  var requestFutureWeath = `api.openweathermap.org/data/2.5/forecast?q={city name}&appid=${apiKey}`;
 
   fetch(requestFutureWeath)
 
