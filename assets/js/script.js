@@ -36,13 +36,16 @@ const cityInput = document.getElementById('city_name');
 */
 
 
+// Every time search, create button, set button's text to search, append button to div, eventListener that when clicked will 
+// when page loads, attempts to retrieve previous city searches, creates buttons
+
 
 // Retrieve current city weather data / fetch command
 function getCurrentWeather() {
  
   var city = cityInput.value
 
-  var requestCurrentUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+  var requestCurrentUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
 
   console.log(cityInput.value);
 
@@ -55,45 +58,24 @@ function getCurrentWeather() {
     })
 
   // With the returned data....
-    .then(function (data) {
-      console.log(data);      
+    .then(function (data) {    
+           
 
-    /*
-    Loop over the data to create, extract, and append relevant data
-      for (var i = 0; i < data.length; i++) {
-
-      Link/create elements: city name, date, temperature, humidity, wind speed
-        var cityNameEl = document.getElementById("current-location");
-        var dateEl = document.getElementById("current-date");
-        var temperatureEl = document.createElement('p');
-        var humidityEl = document.createElement('p');
-        var windEl = document.createElement('p');
-
-      Access content in data and apply to correct variable
-        cityNameEl.textContent=data[i].name;
-        dateEl.textContent=moment().format("MMM Do YYYY");
-        temperatureEl.textContent=data[i].main.temp;
-        humidityEl.textContent=data[i].main.humidity;
-        windEl.textContent=data[i].wind.speed;
-
-      // Append created elements
-        // Are we appending to the DOM if the parent element exists in the html?
-        // Do I need to create the parent element dynamically and append afterwards?
-          temperatureEl.appendChild(currentWeatherEl);
-          humidityEl.appendChild(currentWeatherEl);
-          windEl.appendChild(currentWeatherEl);
-    }
-    */
+    displayCurrentWeather(data);
+    getFutureWeather(data);   
+  }).catch (function (error) {
+    alert("City not found.");    
   })
 }
 
 // Referenced mini-project-06 solution code
 // This function creates and displays the elements for the currentWeather section
 function displayCurrentWeather(data) {
-  console.log(data);    
-  // Is "data" the correct argument to use here? What do I want it to point to?
-      // I want to access the data returned from the fetch request
-      // What is data referencing within the scope of this function?
+  console.log(data);  
+   
+  // This empties out results, allows for new data
+  // innerHTML removes any content inside of a targeted container
+  currentWeatherResults.innerHTML=""
 
   // set up <div> to hold result content
   let resultCard = document.createElement('div');
@@ -108,15 +90,15 @@ function displayCurrentWeather(data) {
 
   // create <h3> to hold searched city name
   let locationEl = document.createElement('h3');
-  locationEl.textContent = data.name;     // Is this the correct format for accessing city name information?
+  locationEl.textContent = data.name;
 
   // create <h4> to hold date
   let dateEl = document.createElement('h4');
-  dateEl.textContent = moment().format("MMM Do YYYY");    // Is this the correct format for adding dates/times?
+  dateEl.textContent = moment().format("MMM Do YYYY");
 
   // create <p> to hold weather information
-  let temperatureEl = docoument.createElement('p');
-  temperatureEl.textContent = data.main.temp;   // Is this the correct format for accessing temp info?
+  let temperatureEl = document.createElement('p');
+  temperatureEl.textContent = data.main.temp;
 
   let humidityEl = document.createElement('p');
   humidityEl.textContent = data.main.humidity
@@ -137,7 +119,7 @@ function getFutureWeather() {
 
   var city = cityInput.value
   
-  var requestFutureUrl = `api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
+  var requestFutureUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`;
   console.log(cityInput.value);
 
   fetch(requestFutureUrl)
@@ -147,11 +129,14 @@ function getFutureWeather() {
     })
 
     .then(function (data) {
-      console.log(data)
+      // console.log(data)
+
+      for (var i = 0; i < 40; i += 8) {
+        console.log(data.list[i]);
+      } 
     })
 }
-// Need to create and append future forecast elements?
-  // How to make this code less repetitive?
+
 
 
   
