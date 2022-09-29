@@ -33,10 +33,17 @@ WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 ```
 
+
+## Link to application
+
+https://justkayla.github.io/06-weather-dashboard/
+
+
 ## Screenshot
 
-Below is the working version of my work day scheduler project.
+Below is the draft version of my weather forecast project.
 
+![](screenshot06.png)
 
 
 ## Contributor
