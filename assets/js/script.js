@@ -98,13 +98,13 @@ function displayCurrentWeather(data) {
 
   // create <p> to hold weather information
   let temperatureEl = document.createElement('p');
-  temperatureEl.textContent = data.main.temp;
+  temperatureEl.textContent = "Temp: " + data.main.temp + " degrees";
 
   let humidityEl = document.createElement('p');
-  humidityEl.textContent = data.main.humidity
+  humidityEl.textContent = "Humidity: " + data.main.humidity + "%";
 
   let windEl = document.createElement('p');
-  windEl.textContent = data.wind.speed;
+  windEl.textContent = "Wind speed: " + data.wind.speed + " mph";
 
   // append weather information to resultBody
   resultBody.append(locationEl, dateEl, temperatureEl, humidityEl, windEl);
