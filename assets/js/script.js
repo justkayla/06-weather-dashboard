@@ -62,7 +62,8 @@ function getCurrentWeather() {
     .then(function (data) {  
            
     displayCurrentWeather(data);
-    getFutureWeather(data);    
+    getFutureWeather(data);
+    displayFutureWeather(data);    
 
   }).catch (function (error) {
     alert("City not found.");
@@ -145,7 +146,7 @@ function getFutureWeather() {
     })
 }
 
-
+// How to get these results to display??
 // Referenced mini-project-06 solution code
 // This function creates and displays the elements for the futureWeather section
 function displayFutureWeather(data) {
