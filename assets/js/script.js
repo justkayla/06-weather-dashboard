@@ -12,7 +12,8 @@ THEN I am again presented with current and future conditions for that city
 
 var searchBtn = document.querySelector('#button-addon1');
 const apiKey = '64fff1a969c76e6a48c1adb0a5ffeb4e';
-const currentWeatherResults = document.querySelector('#current-weather-content')
+const currentWeatherResults = document.querySelector('#current-weather-content');
+const futureWeatherResults = document.querySelector('#future-weather-content');
 const cityInput = document.getElementById('city_name');
 
 
@@ -58,13 +59,14 @@ function getCurrentWeather() {
     })
 
   // With the returned data....
-    .then(function (data) {    
+    .then(function (data) {  
            
-
     displayCurrentWeather(data);
-    getFutureWeather(data);   
+    getFutureWeather(data);    
+
   }).catch (function (error) {
-    alert("City not found.");    
+    alert("City not found.");
+
   })
 }
 
@@ -138,10 +140,62 @@ function getFutureWeather() {
 
       for (var i = 0; i < 40; i += 8) {
         console.log(data.list[i]);
-      } 
+      }    
+         
     })
 }
 
+
+// Referenced mini-project-06 solution code
+// This function creates and displays the elements for the futureWeather section
+function displayFutureWeather(data) {
+  
+  console.log(data);  
+   
+  // This empties out results, allows for new data
+  // innerHTML removes any content inside of a targeted container
+  futureWeatherResults.innerHTML=""
+
+  // set up <div> to hold result content
+  let resultCard = document.createElement('div');
+  // classList returns CSS names of an element; used alon it's read-only, but methods can be used
+  resultCard.classList.add('card', 'bg-light', 'text-dark', 'mb-3', 'p-3');
+
+  // create and append resultBody body <div> inside resultCard container <div>
+  let resultBody = document.createElement('div');
+  resultBody.classList.add('card-body');
+  // Append resultBody to resultCard
+  resultCard.append(resultBody);
+
+  // create <h3> to hold searched city name
+  let locationEl = document.createElement('h3');
+  locationEl.classList.add('h3');
+  locationEl.textContent = data.name;
+
+  // create <h4> to hold date
+  let dateEl = document.createElement('h4');
+  dateEl.classList.add('h4');
+  dateEl.textContent = moment().format("MMM Do YYYY");
+
+  // create <p> to hold weather information
+  let temperatureEl = document.createElement('p');
+  temperatureEl.classList.add('p');
+  temperatureEl.textContent = "Temp: " + data.main.temp + " degrees";
+
+  let humidityEl = document.createElement('p');
+  humidityEl.classList.add('p');
+  humidityEl.textContent = "Humidity: " + data.main.humidity + "%";
+
+  let windEl = document.createElement('p');
+  windEl.classList.add('p');
+  windEl.textContent = "Wind speed: " + data.wind.speed + " mph";
+
+  // append weather information to resultBody
+  resultBody.append(locationEl, dateEl, temperatureEl, humidityEl, windEl);
+  
+  // append entire contents of resultBody to currentWeatherResults
+  futureWeatherResults.append(resultCard);
+}
 
 
   
