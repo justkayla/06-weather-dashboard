@@ -90,20 +90,25 @@ function displayCurrentWeather(data) {
 
   // create <h3> to hold searched city name
   let locationEl = document.createElement('h3');
+  locationEl.classList.add('h3');
   locationEl.textContent = data.name;
 
   // create <h4> to hold date
   let dateEl = document.createElement('h4');
+  dateEl.classList.add('h4');
   dateEl.textContent = moment().format("MMM Do YYYY");
 
   // create <p> to hold weather information
   let temperatureEl = document.createElement('p');
+  temperatureEl.classList.add('p');
   temperatureEl.textContent = "Temp: " + data.main.temp + " degrees";
 
   let humidityEl = document.createElement('p');
+  humidityEl.classList.add('p');
   humidityEl.textContent = "Humidity: " + data.main.humidity + "%";
 
   let windEl = document.createElement('p');
+  windEl.classList.add('p');
   windEl.textContent = "Wind speed: " + data.wind.speed + " mph";
 
   // append weather information to resultBody
