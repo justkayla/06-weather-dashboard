@@ -1,22 +1,3 @@
-/*
-GIVEN a weather dashboard with form inputs
-WHEN I search for a city
-THEN I am presented with current and future conditions for that city and that city is added to the search history
-WHEN I view current weather conditions for that city
-THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the wind speed
-WHEN I view future weather conditions for that city
-THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-WHEN I click on a city in the search history
-THEN I am again presented with current and future conditions for that city
-*/
-
-var searchBtn = document.querySelector('#button-addon1');
-const apiKey = '64fff1a969c76e6a48c1adb0a5ffeb4e';
-const currentWeatherResults = document.querySelector('#current-weather-content');
-const futureWeatherResults = document.querySelector('#future-weather-content');
-const cityInput = document.getElementById('city_name');
-
-
 /*  
   OoO- 
 
@@ -35,6 +16,13 @@ const cityInput = document.getElementById('city_name');
 
   4. Repeat
 */
+
+var searchBtn = document.querySelector('#search-button');
+const apiKey = '64fff1a969c76e6a48c1adb0a5ffeb4e';
+const currentWeatherResults = document.querySelector('#current-weather-content');
+const futureWeatherResults = document.querySelector('#future-weather-content');
+const cityInput = document.getElementById('city_name');
+
 
 
 // Every time search, create button, set button's text to search, append button to div, eventListener that when clicked will 
@@ -62,13 +50,17 @@ function getCurrentWeather() {
     .then(function (data) {  
            
     displayCurrentWeather(data);
-    getFutureWeather(data);
-    displayFutureWeather(data);    
+    getFutureWeather(data);      
 
   }).catch (function (error) {
     alert("City not found.");
 
   })
+
+  // create buttons in here
+  const button = document.createElement("button");
+  button.innerHTML = city;
+  document.querySelector(".search-box").appendChild(button);
 }
 
 // Referenced mini-project-06 solution code
@@ -106,9 +98,7 @@ function displayCurrentWeather(data) {
   temperatureEl.classList.add('p');
   temperatureEl.textContent = "Temp: " + data.main.temp + "°F";
 
-  // let uvEl = document.createElement('p');
-  // uvEl.classList.add('p');
-  // uvEl.textContent = "UV: " + 
+ // No more UV index
 
   let humidityEl = document.createElement('p');
   humidityEl.classList.add('p');
@@ -118,10 +108,10 @@ function displayCurrentWeather(data) {
   windEl.classList.add('p');
   windEl.textContent = "Wind speed: " + data.wind.speed + "mph";
 
-  // How to get icon to display?
-  let iconEl = document.createElement('p');
+  // Fix display
+  let iconEl = document.createElement('img');
   iconEl.classList.add('p');
-  iconEl.textContent = data.weather[0].icon;
+  iconEl.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
 
   let descriptionEl = document.createElement('p');
   descriptionEl.classList.add('p');
@@ -150,10 +140,12 @@ function getFutureWeather() {
     })
 
     .then(function (data) {
-      // console.log(data)
+      console.log(data)
 
-      for (var i = 0; i < 40; i += 8) {
+      for (var i = 7; i < 40; i += 7) {
         console.log(data.list[i]);
+
+        displayFutureWeather(data.list[i]);
       }    
          
     })
@@ -164,12 +156,8 @@ function getFutureWeather() {
 // This function creates and displays the elements for the futureWeather section
 function displayFutureWeather(data) {
   
-  console.log(data);  
-   
-  // This empties out results, allows for new data
-  // innerHTML removes any content inside of a targeted container
-  futureWeatherResults.innerHTML=""
-
+  console.log(data); 
+     
   // set up <div> to hold result content
   let resultCard = document.createElement('div');
   // classList returns CSS names of an element; used alon it's read-only, but methods can be used
@@ -189,7 +177,7 @@ function displayFutureWeather(data) {
   // create <h4> to hold date
   let dateEl = document.createElement('h4');
   dateEl.classList.add('h4');
-  dateEl.textContent = moment().format("MMM Do YYYY");
+  dateEl.textContent = moment.unix(data.dt).format("MMM Do YYYY");
 
   // create <p> to hold weather information
   let temperatureEl = document.createElement('p');
@@ -204,10 +192,10 @@ function displayFutureWeather(data) {
   windEl.classList.add('p');
   windEl.textContent = "Wind speed: " + data.wind.speed + "mph";
 
-  // How to get icon to display?
-  let iconEl = document.createElement('p');
+  // Fix display
+  let iconEl = document.createElement('img');
   iconEl.classList.add('p');
-  iconEl.textContent = data.weather[0].icon;
+  iconEl.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
 
   let descriptionEl = document.createElement('p');
   descriptionEl.classList.add('p');
@@ -226,7 +214,7 @@ function displayFutureWeather(data) {
 
 
 
-// var saveWeather = {
+// const saveWeather = {
 //   city: data.name,
 //   date: moment().format("MMM Do YYYY"),
 //   temperature: data.main.temp,
