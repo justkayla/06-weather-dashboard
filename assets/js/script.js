@@ -104,7 +104,11 @@ function displayCurrentWeather(data) {
   // create <p> to hold weather information
   let temperatureEl = document.createElement('p');
   temperatureEl.classList.add('p');
-  temperatureEl.textContent = "Temp: " + data.main.temp + " degrees";
+  temperatureEl.textContent = "Temp: " + data.main.temp + "°F";
+
+  // let uvEl = document.createElement('p');
+  // uvEl.classList.add('p');
+  // uvEl.textContent = "UV: " + 
 
   let humidityEl = document.createElement('p');
   humidityEl.classList.add('p');
@@ -112,10 +116,19 @@ function displayCurrentWeather(data) {
 
   let windEl = document.createElement('p');
   windEl.classList.add('p');
-  windEl.textContent = "Wind speed: " + data.wind.speed + " mph";
+  windEl.textContent = "Wind speed: " + data.wind.speed + "mph";
+
+  // How to get icon to display?
+  let iconEl = document.createElement('p');
+  iconEl.classList.add('p');
+  iconEl.textContent = data.weather[0].icon;
+
+  let descriptionEl = document.createElement('p');
+  descriptionEl.classList.add('p');
+  descriptionEl.textContent = data.weather[0].main;
 
   // append weather information to resultBody
-  resultBody.append(locationEl, dateEl, temperatureEl, humidityEl, windEl);
+  resultBody.append(locationEl, dateEl, temperatureEl, humidityEl, windEl, iconEl, descriptionEl);
   
   // append entire contents of resultBody to currentWeatherResults
   currentWeatherResults.append(resultCard);
@@ -181,7 +194,7 @@ function displayFutureWeather(data) {
   // create <p> to hold weather information
   let temperatureEl = document.createElement('p');
   temperatureEl.classList.add('p');
-  temperatureEl.textContent = "Temp: " + data.main.temp + " degrees";
+  temperatureEl.textContent = "Temp: " + data.main.temp + "°F";
 
   let humidityEl = document.createElement('p');
   humidityEl.classList.add('p');
@@ -189,15 +202,41 @@ function displayFutureWeather(data) {
 
   let windEl = document.createElement('p');
   windEl.classList.add('p');
-  windEl.textContent = "Wind speed: " + data.wind.speed + " mph";
+  windEl.textContent = "Wind speed: " + data.wind.speed + "mph";
+
+  // How to get icon to display?
+  let iconEl = document.createElement('p');
+  iconEl.classList.add('p');
+  iconEl.textContent = data.weather[0].icon;
+
+  let descriptionEl = document.createElement('p');
+  descriptionEl.classList.add('p');
+  descriptionEl.textContent = data.weather[0].main;
 
   // append weather information to resultBody
-  resultBody.append(locationEl, dateEl, temperatureEl, humidityEl, windEl);
+  resultBody.append(locationEl, dateEl, temperatureEl, humidityEl, windEl, iconEl, descriptionEl);
   
-  // append entire contents of resultBody to currentWeatherResults
+  // append entire contents of resultBody to futureWeatherResults
   futureWeatherResults.append(resultCard);
 }
 
+
+
+
+
+
+
+// var saveWeather = {
+//   city: data.name,
+//   date: moment().format("MMM Do YYYY"),
+//   temperature: data.main.temp,
+//   humidity: data.main.humidity,
+//   wind: data.wind.speed,
+//   icon: data.weather[0].icon,
+//   description: data.weather[0].main
+// };
+
+// localStorage.setItem("saveWeather", JSON.stringify(saveWeather));
 
   
 
@@ -250,5 +289,3 @@ sampleData.list.forEach( function(timestampObj){
     // array
 
 // eventListener for search button, fetch request to grab api data and append things to screen (dynamically styled)
-
-// gitHub api users for dynamically build query string/query url into the fetch request, from fetch request you get your data that you can do whatever you want it
