@@ -70,6 +70,13 @@ h2 {
     color: black;
 }
 
+.icon {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* height: 75px; */
+}
+
 .text-dark {
     color: #000000 !important;
 }

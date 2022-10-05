@@ -110,7 +110,7 @@ function displayCurrentWeather(data) {
 
   // Fix display
   let iconEl = document.createElement('img');
-  iconEl.classList.add('p');
+  iconEl.classList.add('icon');
   iconEl.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
 
   let descriptionEl = document.createElement('p');
@@ -194,7 +194,7 @@ function displayFutureWeather(data) {
 
   // Fix display
   let iconEl = document.createElement('img');
-  iconEl.classList.add('p');
+  iconEl.classList.add('icon');
   iconEl.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
 
   let descriptionEl = document.createElement('p');
