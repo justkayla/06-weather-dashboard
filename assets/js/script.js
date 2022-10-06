@@ -24,6 +24,7 @@ const cityInput = document.getElementById('city_name');
 const currentWeatherResults = document.getElementById('current-weather-content');
 const futureWeatherResults = document.getElementById('future-weather-content');
 
+let savedWeather = [];
 
 // const savedCity = 
 // const savedWeather =
@@ -65,8 +66,14 @@ function getCurrentWeather() {
 
   // create buttons in here
   const button = document.createElement("button");
+  button.setAttribute("id", "city-button");
   button.innerHTML = city;
   document.querySelector(".search-box").appendChild(button);  
+
+   
+  button.addEventListener('click', function() {
+    // retrieve saved data
+    
 }
 
 
@@ -158,7 +165,6 @@ function getFutureWeather() {
     })
 }
 
-// How to get these results to display??
 // Referenced mini-project-06 solution code
 // This function creates and displays the elements for the futureWeather section
 function displayFutureWeather(data) {
@@ -242,17 +248,30 @@ function displayFutureWeather(data) {
 
 // city.textContent = data.name
 
+// function storeWeather() {
+//   localStorage.setItem("saved-weather", JSON.stringify(savedWeather));
+// }
+
 searchBtn.addEventListener('click', function() {
-  
-  let data = {
-    city: cityInput.value,
-    current: currentWeatherResults.value,   // Is this not working because it's an array?
-    future: futureWeatherResults.value
+
+  // Click search button, results are saved to local storage
+
+  // If the search input was accepted,
+  if (cityInput === true) {
+
+    // Save contents of search to local storage
+    // Assign to city button
+
   }
-  console.log(data);
+  
+  storeWeather() {
+    savedWeather.push(cityInput + currentWeatherResults + futureWeatherResults);
+    cityInput.value = "";
+    localStorage.setItem("saved-weather", JSON.stringify(savedWeather));
+  };
   
   getCurrentWeather();
-
+  // storeWeather();
 });
 
 
