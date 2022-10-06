@@ -17,11 +17,17 @@
   4. Repeat
 */
 
-var searchBtn = document.querySelector('#search-button');
+// DOM selectors
 const apiKey = '64fff1a969c76e6a48c1adb0a5ffeb4e';
-const currentWeatherResults = document.querySelector('#current-weather-content');
-const futureWeatherResults = document.querySelector('#future-weather-content');
+const searchBtn = document.querySelector('#search-button');
 const cityInput = document.getElementById('city_name');
+const currentWeatherResults = document.getElementById('current-weather-content');
+const futureWeatherResults = document.getElementById('future-weather-content');
+
+
+// const savedCity = 
+// const savedWeather =
+
 
 
 
@@ -32,9 +38,9 @@ const cityInput = document.getElementById('city_name');
 // Retrieve current city weather data / fetch command
 function getCurrentWeather() {
  
-  var city = cityInput.value
+  let city = cityInput.value;
 
-  var requestCurrentUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
+  let requestCurrentUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
 
   console.log(cityInput.value);
 
@@ -60,8 +66,9 @@ function getCurrentWeather() {
   // create buttons in here
   const button = document.createElement("button");
   button.innerHTML = city;
-  document.querySelector(".search-box").appendChild(button);
+  document.querySelector(".search-box").appendChild(button);  
 }
+
 
 // Referenced mini-project-06 solution code
 // This function creates and displays the elements for the currentWeather section
@@ -121,16 +128,16 @@ function displayCurrentWeather(data) {
   resultBody.append(locationEl, dateEl, temperatureEl, humidityEl, windEl, iconEl, descriptionEl);
   
   // append entire contents of resultBody to currentWeatherResults
-  currentWeatherResults.append(resultCard);
+  currentWeatherResults.append(resultCard);  
 }
 
 
 // Retrieve future city weather data / fetch command
 function getFutureWeather() {
 
-  var city = cityInput.value
+  let city = cityInput.value
   
-  var requestFutureUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`;
+  let requestFutureUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`;
   console.log(cityInput.value);
 
   fetch(requestFutureUrl)
@@ -142,10 +149,10 @@ function getFutureWeather() {
     .then(function (data) {
       console.log(data)
 
-      for (var i = 7; i < 40; i += 7) {
+      for (let i = 7; i < 40; i += 7) {
         console.log(data.list[i]);
 
-        displayFutureWeather(data.list[i]);
+        displayFutureWeather(data.list[i]);        
       }    
          
     })
@@ -157,6 +164,10 @@ function getFutureWeather() {
 function displayFutureWeather(data) {
   
   console.log(data); 
+
+  // This empties out results, allows for new data
+  // innerHTML removes any content inside of a targeted container
+  // futureWeatherResults.innerHTML=""
      
   // set up <div> to hold result content
   let resultCard = document.createElement('div');
@@ -226,9 +237,24 @@ function displayFutureWeather(data) {
 
 // localStorage.setItem("saveWeather", JSON.stringify(saveWeather));
 
-  
+// let city = localStorage.getItem("city");
+// console.log(city);
 
-searchBtn.addEventListener('click', getCurrentWeather);
+// city.textContent = data.name
+
+searchBtn.addEventListener('click', function() {
+  
+  let data = {
+    city: cityInput.value,
+    current: currentWeatherResults.value,   // Is this not working because it's an array?
+    future: futureWeatherResults.value
+  }
+  console.log(data);
+  
+  getCurrentWeather();
+
+});
+
 
 
 
