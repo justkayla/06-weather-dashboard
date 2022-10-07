@@ -41,13 +41,12 @@ function getCurrentWeather(event) {
   button.innerHTML = city;
   document.querySelector(".search-box").appendChild(button);
 
+  //event listener that sends city name to pre-existing function
+  // if city-button is clicked, button's html as city, input field as city
   button.addEventListener('click', function() {
     event.target = button;
   })
 }
-
-//event listener that sends city name to pre-existing function
-// if city-button is clicked, button's html as city, input field as city
 
 // Referenced mini-project-06 solution code
 // This function creates and displays the elements for the currentWeather section
@@ -204,7 +203,7 @@ searchBtn.addEventListener('click', function() {
   // Save city to local storage
   // Assign to city button
    
-    savedWeather.push(cityInput.value);
+    savedWeather.push(cityInput.value);   // Why isn't this working?
     cityInput.value = "";
     localStorage.setItem("saved-weather", JSON.stringify(savedWeather));  
   
