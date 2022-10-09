@@ -1,7 +1,7 @@
 // DOM selectors
 const apiKey = '64fff1a969c76e6a48c1adb0a5ffeb4e';
 const searchBtn = document.querySelector('#search-button');
-const cityInput = document.getElementById('city_name');
+let cityInput = document.getElementById('city_name');
 const currentWeatherResults = document.getElementById('current-weather-content');
 const futureWeatherResults = document.getElementById('future-weather-content');
 
@@ -43,9 +43,9 @@ function getCurrentWeather(event) {
 
   //event listener that sends city name to pre-existing function
   // if city-button is clicked, button's html as city, input field as city
-  button.addEventListener('click', function() {
-    event.target = button;
-  })
+  // button.addEventListener('click', function() {
+  //   event.target = button;
+  // })
 }
 
 // Referenced mini-project-06 solution code
@@ -203,6 +203,8 @@ searchBtn.addEventListener('click', function() {
   // Save city to local storage
   // Assign to city button
    
+    console.log(cityInput.value);
+    console.log(savedWeather);
     savedWeather.push(cityInput.value);   // Why isn't this working?
     cityInput.value = "";
     localStorage.setItem("saved-weather", JSON.stringify(savedWeather));  
