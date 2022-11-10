@@ -48,4 +48,4 @@ Below is the draft version of my weather forecast project.
 
 ## Contributor
 
-Kayla Justice &copy;2022 
+Kayla Justice 2022 
